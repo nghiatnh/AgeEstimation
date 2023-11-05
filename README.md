@@ -43,9 +43,13 @@ To achieve the original goal of this project, we need to group the images into a
  
 ## III. Models
 
-1. AlexNet architecture
-2. VGGNet architecture
-3. Results
+### 1. AlexNet architecture
+<p align="center">
+  <img src="_static/img/AlexNet.png" >
+</p>
+
+### 2. VGGNet architecture
+### 3. Results
 
 ## IV. Far and further
 

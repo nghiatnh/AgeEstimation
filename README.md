@@ -7,7 +7,7 @@ Nowadays, marketing campaigns are often divided into small groups based on diffe
 
 ## II. Data Mining 
 
-To build a model to predict the age of Vietnamese people, we need a dataset that shows the dependences of Vietnamese people's age on their characteristics. 
+To build a model to predicts the age of Vietnamese people, we need a dataset that shows the dependences of Vietnamese people's age on their characteristics. 
 In this project, we chose Vietnamese celebrities to collect data because their background information (age, image) is easy to find. However, using the images of celebrities also has many challenges. One of them is that they are often younger than their actual age.
 
 
@@ -18,8 +18,7 @@ In this project, we chose Vietnamese celebrities to collect data because their b
 - So how do we get their data? We use [Selenium](https://www.selenium.dev/) - a useful tool for collecting data automatically. Selenium simulates accurately how we operate with mouse and keyboard: access Google images, search for images of celebrities in the list, select ``"Open image in new tab"`` and get the image link.
 
 - After this step, we have a list of image links corresponding to the artists. Then, we use the Python library ``requests`` to download and save to the corresponding folder of celebrities’ names to get the raw dataset.
-
-(demo)
+<img src="./imgs/data_structure.png" alt="structure" height="400"/> <img src="./imgs/baoanh_9.jpg" alt="demo" height="400"/>
 
 ### 2. Crop faces
 
@@ -29,6 +28,7 @@ People in the images may not be the celebrities targeting.
 Context factors (lighting, background, etc).
 - For the solutions, we use the [OpenCV](https://opencv.org/) face detection model to identify all faces in images (including target celeb and others). To increase accuracy, we use **haarcascade_frontalface_default** model with ``minNeighbors=30``.
 - As a result, our dataset only contains faces.
+<img src="./imgs/crop_faces.png" alt="demo" height="200"/>
 
 ### 3. Filter
 
@@ -39,17 +39,36 @@ Context factors (lighting, background, etc).
 
 ### 4. Group data
 
-To achieve the original goal of this project, we need to group the images into appropriate data groups (age). We divided our dataset into groups (25–30, 31–35, 36–40, 41–45, 46–50, and 51–55). Therefore, the number of classes is now 6 instead of 31, which makes the prediction better and simpler..
- 
+To achieve the original goal of this project, we need to group the images into appropriate data groups (age). We divided our dataset into groups (25–30, 31–35, 36–40, 41–45, 46–50, and 51–55). Therefore, the number of classes is now 6 instead of 31, which makes the prediction better and simpler.
+<img src="./imgs/histplot.png" alt="demo" height="400"/> 
+
 ## III. Models
 
 ### 1. AlexNet architecture
+
 <p align="center">
-  <img src="_static/img/AlexNet.png" >
+  <img src="imgs/alexnet.png" >
 </p>
 
 ### 2. VGGNet architecture
+
+- We using transfer learning technique with ``VGGNet19``, pretrained weight is [imagenet](https://www.image-net.org/).
+- This is our model:
+<p align="center">
+  <img src="imgs/vgg19.png" >
+</p>
+- We do not retrain VGGNet19, we only train last 3 full-connection layers and get some good results.
+
 ### 3. Results
+
+- VGG19 has a better performance than Alexnet.
+
+|          |Baseline| Alexnet | VGG19 |
+|----------|--------|---------|-------|
+|Train     |20.86%  |34.57%   |99.31% |
+|Validation|23.45%  |31.58%   |77.24% |
+
+<p style="margin-left: 100px;"><b>(Alexnet vs VGG19)</b></p>
 
 ## IV. Far and further
 
@@ -62,5 +81,3 @@ To achieve the original goal of this project, we need to group the images into a
 
 - We want to use some boosting techniques (K-Fold, AdaBoost,...) to improve the performance of the model.
 - Currently, the model is not performing well when using augmentation. In the future, we will try to find out the cause and apply more augmentation methods to increase the amount of data and improve the model for images with special factors (e.g., blurred, tilted, etc).
-
-

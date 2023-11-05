@@ -18,7 +18,10 @@ In this project, we chose Vietnamese celebrities to collect data because their b
 - So how do we get their data? We use [Selenium](https://www.selenium.dev/) - a useful tool for collecting data automatically. Selenium simulates accurately how we operate with mouse and keyboard: access Google images, search for images of celebrities in the list, select ``"Open image in new tab"`` and get the image link.
 
 - After this step, we have a list of image links corresponding to the artists. Then, we use the Python library ``requests`` to download and save to the corresponding folder of celebrities’ names to get the raw dataset.
+
+<p align="center">
 <img src="./imgs/data_structure.png" alt="structure" height="400"/> <img src="./imgs/baoanh_9.jpg" alt="demo" height="400"/>
+</p>
 
 ### 2. Crop faces
 
@@ -28,7 +31,10 @@ People in the images may not be the celebrities targeting.
 Context factors (lighting, background, etc).
 - For the solutions, we use the [OpenCV](https://opencv.org/) face detection model to identify all faces in images (including target celeb and others). To increase accuracy, we use **haarcascade_frontalface_default** model with ``minNeighbors=30``.
 - As a result, our dataset only contains faces.
+
+<p align="center">
 <img src="./imgs/crop_faces.png" alt="demo" height="200"/>
+</p>
 
 ### 3. Filter
 
@@ -40,7 +46,10 @@ Context factors (lighting, background, etc).
 ### 4. Group data
 
 To achieve the original goal of this project, we need to group the images into appropriate data groups (age). We divided our dataset into groups (25–30, 31–35, 36–40, 41–45, 46–50, and 51–55). Therefore, the number of classes is now 6 instead of 31, which makes the prediction better and simpler.
+
+<p align="center">
 <img src="./imgs/histplot.png" alt="demo" height="400"/> 
+</p>
 
 ## III. Models
 
@@ -54,9 +63,11 @@ To achieve the original goal of this project, we need to group the images into a
 
 - We using transfer learning technique with ``VGGNet19``, pretrained weight is [imagenet](https://www.image-net.org/).
 - This is our model:
+
 <p align="center">
   <img src="imgs/vgg19.png" >
 </p>
+
 - We do not retrain VGGNet19, we only train last 3 full-connection layers and get some good results.
 
 ### 3. Results

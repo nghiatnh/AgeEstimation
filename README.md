@@ -72,15 +72,16 @@ To achieve the original goal of this project, we need to group the images into a
 
 ### 3. Results
 
-- Chúng tôi chia tập data thành 80% train và 20% test. Chúng tôi sử dụng ``cross entropy`` loss function và ``accuracy`` metric.
-- Distribution của 2 tập data như sau:
+- We use 80% of data for training and the remaining for testing. We use ``cross entropy`` loss function and ``accuracy`` metric.
+
 <p align="center">
   <img src="imgs/test_distribution.png"/>
+
+  <p style="text-align: center;"><b>Distribution of dataset</b></p>
 </p>
 
-- Khi sử dụng mô hình Alexnet, chúng tôi nhận được kết quả là **34.57%** cho tập train và **31.58%** cho tập test. Có vẻ mô hình Alexnet đang bị underfitting.
-- Khi sử dụng mô hình VGG19, chúng tôi được kết quả là **97%** cho tập train và **45.33%** cho tập test. Nhận thấy model đang bị overfitting khi bị bias vào một class chứa nhiều data nhất ở tập train, tôi đã thử upsampling data lên thành (``725`` samples) rồi chia lại tập train/test. Kết quả là tập validation được cải thiện đáng kể. Tuy nhiên vẫn xuất hiện overfitting khi mà accuary của tập train cao hơn rất nhiều so với tập test (**99.31%** cho tập train và **77.24%** cho tập test).
-- Khi so sánh 2 model Alexnet và VGG19, chúng tôi có bảng benchmark như sau:
+- The Alexnet model exhibites signs of underfitting, with an accuracy of **34.57%** on the training set and **31.58%** on the test set.
+- The VGG19 model exhibites overfitting, with an accuracy of **97%** on the training set but only **45.33%** on the test set. So, data upsampling is applied to address class imbalance, raising the minority class to **725** samples. This improves test accuracy but seems to fail to eliminate overfitting, as evidences by the significant gap between training and test set accuracies (**99.31%** and **77.24%**, respectively).
 
 <div style="margin-left: auto; margin-right: auto; width: 550px;">
 
@@ -89,16 +90,15 @@ To achieve the original goal of this project, we need to group the images into a
 |Train|20.86%  |34.57%   |99.31% |97.00%             |
 |Test |23.45%  |31.58%   |77.24% |45.33%             |
 
-<p style="text-align: center;"><b>(Alexnet vs VGG19)</b></p>
+<p style="text-align: center;"><b>(Benchmarking Alexnet and VGG19)</b></p>
 </div>
 
-- Có thể giải thích nguyên nhân việc model Alexnet bị overfitting vì nó không detect được những features của hình ảnh trong khi VGG19 đã học được những features đó nhờ pretrained weights của ``imagenet``.
+- The Alexnet model's underfitting may stem from its inability to extract image features, whereas the VGG19 model effectively learns these features utilizing pretrained ``ImageNet`` weights.
 
 ## IV. Conclusion
 
-- Sau khi thu thập data và qua những bước xử lý cẩn thận chúng tôi đã có một bộ data có thể sử dụng để train model dự đoán tuổi cho người Việt. Tuy bộ data còn ít sample nhưng vẫn cho thấy một tiềm năng có thể scale trong tương lai do không tốn quá nhiều công sử xử lý của sức người.
-- Kết quả thu được từ 2 model chúng tôi đã sử dụng cho thấy việc sử dụng transfer learning có vẻ sẽ hữu ích hơn trong tương lai. Bên cạnh đó còn giúp chúng tôi lưu ý thêm về  đặc điểm của model trước khi apply để trán vấn đề overfiting và underfiting.
-
+- After meticulous data collection and processing, we have developed a Vietnamese face dataset suitable for training an age prediction model. Despite its limited sample size, the dataset holds promising potential for future scaling due to its less manual processing requirements.
+- The results of our experiments with two models suggest that transfer learning holds promise for future age prediction tasks. Additionally, understanding model characteristics is crucial to prevent overfitting and underfitting issues.
 ## IV. Far and further
 
 ### 1. Enhance dataset

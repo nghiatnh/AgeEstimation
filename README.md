@@ -73,11 +73,9 @@ To achieve the original goal of this project, we need to group the images into a
 ### 3. Results
 
 - We use 80% of data for training and the remaining for testing. We use ``cross entropy`` loss function and ``accuracy`` metric.
-
+- Distribution of dataset:
 <p align="center">
   <img src="imgs/test_distribution.png"/>
-
-  <p style="text-align: center;"><b>Distribution of dataset</b></p>
 </p>
 
 - The Alexnet model exhibites signs of underfitting, with an accuracy of **34.57%** on the training set and **31.58%** on the test set.
@@ -85,7 +83,7 @@ To achieve the original goal of this project, we need to group the images into a
 
 <div style="margin-left: auto; margin-right: auto; width: 550px;">
 
-|          |Baseline| Alexnet | VGG19 | VGG19 no sampling |
+|     |Baseline| Alexnet | VGG19 | VGG19 no sampling |
 |-----|--------|---------|-------|:-----------------:|
 |Train|20.86%  |34.57%   |99.31% |97.00%             |
 |Test |23.45%  |31.58%   |77.24% |45.33%             |
